@@ -1,0 +1,13 @@
+.app-layout {
+  display: flex;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f4f7f6; /* Color de fondo suave */
+}
+
+.content-area {
+  flex-grow: 1; /* Ocupa todo el espacio restante a la derecha del sidebar */
+  padding: 30px;
+  overflow-y: auto; /* Permite hacer scroll si hay muchas citas */
+}

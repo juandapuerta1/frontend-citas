@@ -1,0 +1,53 @@
+<div class="crud-container">
+  <h2>Gestión de Citas</h2>
+
+  <div class="formulario">
+    <h3>{{ editando ? 'Editar Cita' : 'Nueva Cita' }}</h3>
+    <!-- ngModel actualizados -->
+    <input type="text" [(ngModel)]="citaActual.nombre_cliente" placeholder="Nombre del cliente" class="input-field">
+    <input type="text" [(ngModel)]="citaActual.servicio" placeholder="Servicio (ej. Uñas Acrílicas)" class="input-field">
+    <input type="datetime-local" [(ngModel)]="citaActual.fecha_hora" class="input-field">
+
+    <select [(ngModel)]="citaActual.estado" class="input-field">
+      <option value="Agendada">Agendada</option>
+      <option value="Confirmada">Confirmada</option>
+      <option value="Cancelada">Cancelada</option>
+    </select>
+
+    <button (click)="guardarCita()" class="btn btn-primary">
+      {{ editando ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <button *ngIf="editando" (click)="limpiarFormulario()" class="btn btn-secondary">Cancelar</button>
+  </div>
+
+  <hr>
+
+  <table class="tabla-citas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Fecha y Hora</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of listaCitas">
+        <td>{{ cita.id }}</td>
+        <td>{{ cita.nombre_cliente }}</td>
+        <td>{{ cita.servicio }}</td>
+        <td>{{ cita.fecha_hora }}</td>
+        <td>{{ cita.estado }}</td>
+        <td>
+          <button (click)="editarCita(cita)" class="btn btn-edit">Editar</button>
+          <button (click)="eliminarCita(cita.id)" class="btn btn-delete">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="listaCitas.length === 0">
+        <td colspan="6" style="text-align: center;">No hay citas registradas.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
